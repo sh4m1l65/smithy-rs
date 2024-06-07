@@ -70,5 +70,13 @@ publishing {
             from(components["java"])
         }
     }
-    repositories { maven { url = uri(layout.buildDirectory.dir("repository")) } }
+    repositories {
+        maven {
+            url = uri("https://codeartifact-prod-862198903141.d.codeartifact.us-east-1.amazonaws.com/maven/codeartifact-prod-maven/")
+            credentials {
+                username = "aws"
+                password = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+            }
+        }
+    }
 }

@@ -4,8 +4,13 @@
  */
 buildscript {
     repositories {
-        mavenCentral()
-        google()
+        maven {
+            url = uri("https://codeartifact-prod-862198903141.d.codeartifact.us-east-1.amazonaws.com/maven/codeartifact-prod-maven/")
+            credentials {
+                username = "aws"
+                password = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+            }
+        }
     }
 
     val kotlinVersion: String by project
@@ -17,11 +22,13 @@ buildscript {
 allprojects {
     val allowLocalDeps: String by project
     repositories {
-        if (allowLocalDeps.toBoolean()) {
-         mavenLocal()
+        maven {
+            url = uri("https://codeartifact-prod-862198903141.d.codeartifact.us-east-1.amazonaws.com/maven/codeartifact-prod-maven/")
+            credentials {
+                username = "aws"
+                password = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+            }
         }
-        mavenCentral()
-        google()
     }
 }
 
